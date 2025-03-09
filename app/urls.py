@@ -9,7 +9,8 @@ from .views import (
     CartView,
     OrderView,
     UserOrdersView,
-    AdminRegisterView
+    AdminRegisterView,
+    AdminRegisterRetriveView
     
 )
 from rest_framework_simplejwt.views import (
@@ -38,11 +39,13 @@ urlpatterns = [
 
     path('register/', RegisterView.as_view(), name='register'),
     path('admin-register/', AdminRegisterView.as_view(), name='register'),
+    path('admin-register/<int:pk>/', AdminRegisterRetriveView.as_view(), name='register'),
+
 
     path('login/', LoginView.as_view(), name='login'),
     # path('user/profile/', UserProfileView.as_view(), name='user-profile'),
     path('user/profile/<int:id>/', UserProfileView.as_view(), name='user-profile-by-id'),  # Specific user's profile
-    path('admin-user/profile/<int:id>/',AdminUserProfileView.as_view(), name='user-profile-by-id'),  # Specific user's profile
+    path('admin-user/profile/',AdminUserProfileView.as_view(), name='user-profile-by-id'),  # Specific user's profile
 
     path('categories/', CategoryListCreateView.as_view(), name='category-list'),
     path('admin-categories/', AdminCategoryListCreateView.as_view(), name='category-list'),
