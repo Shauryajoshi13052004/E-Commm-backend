@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import (
-   AdminCategoryDetailView, AdminCategoryListCreateView, RegisterView, LoginView, 
+   AdminCartView, AdminCategoryDetailView, AdminCategoryListCreateView, AdminOrderView, AdminProductDetailView, AdminProductListCreateView, AdminUserOrdersView, AdminUserProfileView, RegisterView, LoginView, 
     UserProfileView, 
     CategoryDetailView,
     CategoryListCreateView,
@@ -42,15 +42,31 @@ urlpatterns = [
     path('login/', LoginView.as_view(), name='login'),
     # path('user/profile/', UserProfileView.as_view(), name='user-profile'),
     path('user/profile/<int:id>/', UserProfileView.as_view(), name='user-profile-by-id'),  # Specific user's profile
+    path('admin-user/profile/<int:id>/',AdminUserProfileView.as_view(), name='user-profile-by-id'),  # Specific user's profile
+
     path('categories/', CategoryListCreateView.as_view(), name='category-list'),
     path('admin-categories/', AdminCategoryListCreateView.as_view(), name='category-list'),
+
     path('categories/<int:pk>/', CategoryDetailView.as_view(), name='category-detail'),
     path('admin-categories/<int:pk>/', AdminCategoryDetailView.as_view(), name='category-detail'),
+
     path('products/', ProductListCreateView.as_view(), name='product-list'),
+    path('admin-products/', AdminProductListCreateView.as_view(), name='product-list'),
+
     path('products/<int:pk>/', ProductDetailView.as_view(), name='product-detail'),
+    path('admin-products/<int:pk>/', AdminProductDetailView.as_view(), name='product-detail'),
+
     path('cart/', CartView.as_view(), name='cart'),
+    path('admin-cart/', AdminCartView.as_view(), name='cart'),
+
     path('cart/<int:product_id>/', CartView.as_view(), name='cart-delete'),
+    path('admin-cart/<int:product_id>/', AdminCartView.as_view(), name='cart-delete'),
+
+
     path('order/create/', OrderView.as_view(), name='create_order'),
-    path('orders/', UserOrdersView.as_view(), name='user_orders'),
+    path('admin-order/create/', AdminOrderView.as_view(), name='create_order'),
+
+    path('orders/<int:product_id>/', UserOrdersView.as_view(), name='user_orders'),
+    path('admin-orders/<int:product_id>/', AdminUserOrdersView.as_view(), name='user_orders'),
 
 ]
